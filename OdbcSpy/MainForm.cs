@@ -10,13 +10,20 @@ namespace OdbcSpy
     {
         private string _defaultConnectionString = "DSN=DriverName;UID=username;pwd=password";
         private OdbcClient odbc;
+        private const string PRODUCT_NAME = "ODBC Spy";
 
         public MainForm()
         {
             InitializeComponent();
             ConnectionStringBox.Text = _defaultConnectionString;
 
-            Connect();
+            //Set window title
+            string architectureText = System.Environment.Is64BitProcess
+                ? " (64 bit)"
+                : " (32 bit)";
+
+            Text = PRODUCT_NAME + architectureText;
+
         }
 
         private void Connect()
@@ -26,9 +33,17 @@ namespace OdbcSpy
             odbc.Connect(ConnectionStringBox.Text);
         }
 
+        private void Execute()
+        {
+            Connect();
+            EnableCancelButton(true);
+            odbc.Execute(QueryBox.Text);
+        }
+
         void odbc_Finished(object sender, EventArgs e)
         {
             EnableCancelButton(false);
+            SetResultsText(odbc.Results);
         }
 
         private void ExecuteButton_Click(object sender, EventArgs e)
@@ -43,13 +58,7 @@ namespace OdbcSpy
                 Execute();
             }
         }
-
-        private void Execute()
-        {
-            EnableCancelButton(true);
-            odbc.Execute(QueryBox.Text);
-        }
-
+        
         delegate void BooleanDelegate(bool on);
         void EnableCancelButton(bool enable)
         {
@@ -62,27 +71,18 @@ namespace OdbcSpy
             cancelButton.Enabled = enable;
         }
 
-        private void renderText(List<String> Columns, List<List<String>> Rows, String textOutput)
+        delegate void TextDelegate(string text);
+        void SetResultsText(string text)
         {
-            foreach (string cn in Columns)
+            if (InvokeRequired)
             {
-                textOutput += cn + ",";
+                BeginInvoke(new TextDelegate(SetResultsText), new object[] { text });
+                return;
             }
 
-            textOutput += "\r\n";
-
-            foreach (List<String> r in Rows)
-            {
-                foreach (string v in r)
-                {
-                    textOutput += v + ",";
-                }
-                textOutput += "\r\n";
-            }
-
-            Results.Text = textOutput;
+            Results.Text = text;
         }
-
+        
         private void CopyButton_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(Results.Text);

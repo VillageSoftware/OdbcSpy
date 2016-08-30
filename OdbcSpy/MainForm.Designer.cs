@@ -42,7 +42,7 @@
             this.ExecuteButton.Location = new System.Drawing.Point(555, 45);
             this.ExecuteButton.Name = "ExecuteButton";
             this.ExecuteButton.Size = new System.Drawing.Size(127, 27);
-            this.ExecuteButton.TabIndex = 0;
+            this.ExecuteButton.TabIndex = 3;
             this.ExecuteButton.Text = "E&xecute query (F5)";
             this.ExecuteButton.UseVisualStyleBackColor = true;
             this.ExecuteButton.Click += new System.EventHandler(this.ExecuteButton_Click);
@@ -59,7 +59,7 @@
             this.Results.Name = "Results";
             this.Results.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.Results.Size = new System.Drawing.Size(670, 326);
-            this.Results.TabIndex = 1;
+            this.Results.TabIndex = 6;
             // 
             // QueryBox
             // 
@@ -70,7 +70,7 @@
             this.QueryBox.Name = "QueryBox";
             this.QueryBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.QueryBox.Size = new System.Drawing.Size(537, 87);
-            this.QueryBox.TabIndex = 2;
+            this.QueryBox.TabIndex = 1;
             this.QueryBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.QueryBox_KeyUp);
             // 
             // CopyButton
@@ -78,7 +78,7 @@
             this.CopyButton.Location = new System.Drawing.Point(555, 105);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(127, 27);
-            this.CopyButton.TabIndex = 3;
+            this.CopyButton.TabIndex = 5;
             this.CopyButton.Text = "&Copy results";
             this.CopyButton.UseVisualStyleBackColor = true;
             this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
@@ -91,14 +91,14 @@
             this.ConnectionStringBox.Multiline = true;
             this.ConnectionStringBox.Name = "ConnectionStringBox";
             this.ConnectionStringBox.Size = new System.Drawing.Size(537, 27);
-            this.ConnectionStringBox.TabIndex = 4;
+            this.ConnectionStringBox.TabIndex = 0;
             // 
             // ConnectButton
             // 
             this.ConnectButton.Location = new System.Drawing.Point(555, 12);
             this.ConnectButton.Name = "ConnectButton";
             this.ConnectButton.Size = new System.Drawing.Size(127, 27);
-            this.ConnectButton.TabIndex = 5;
+            this.ConnectButton.TabIndex = 2;
             this.ConnectButton.Text = "Co&nnect";
             this.ConnectButton.UseVisualStyleBackColor = true;
             this.ConnectButton.Click += new System.EventHandler(this.Connect_Click);
@@ -109,7 +109,7 @@
             this.cancelButton.Location = new System.Drawing.Point(555, 72);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(127, 27);
-            this.cancelButton.TabIndex = 6;
+            this.cancelButton.TabIndex = 4;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);

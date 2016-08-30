@@ -28,8 +28,21 @@ namespace OdbcSpy
 
         public void Connect(string connectionString)
         {
-            _connectionString = connectionString;
-            c = new OdbcConnection(_connectionString);
+            try
+            {
+                _connectionString = connectionString;
+                c = new OdbcConnection(_connectionString);
+                Results = "Connected.\r\n";
+            }
+            catch (Exception ex)
+            {
+                Results = ex.ToString();
+                return;
+            }
+            finally
+            {
+                RaiseFinished();
+            }
         }
 
         public void CancelQuery()
@@ -44,23 +57,17 @@ namespace OdbcSpy
             try
             {
                 c.Open();
-            }
-            catch (Exception ex)
-            {
-                Results = ex.ToString();
-            }
 
-            var command = new OdbcCommand(_query);
-            command.Connection = c;
+                var command = new OdbcCommand(_query);
+                command.Connection = c;
 
-            try
-            {
                 string textOutput = RunQuery(command);
                 Results = textOutput;
             }
             catch (Exception ex)
             {
                 Results = ex.ToString();
+                return;
             }
             finally
             {
